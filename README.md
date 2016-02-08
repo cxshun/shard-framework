@@ -37,7 +37,7 @@ Every database connection is a database node.
 
 + range-hash like this:
 
-        <shard class="com.jdbc.shard.domain.Teacher" type="range-hash">
+        <shard class="Teacher" type="range-hash">
             <range range="0~30">
                 <match match="0">data1</match>
                 <match match="1">data2</match>
@@ -46,9 +46,9 @@ Every database connection is a database node.
             </range>
         </shard>
 
-+ no need to has:
++ no need to shard:
 
-        <shard class="com.jdbc.shard.domain.Course" type="none">
+        <shard class="Course" type="none">
             <match>data4</match>
         </shard>
 
@@ -59,10 +59,16 @@ Every class map to an shard node, every match match to the value after hash.
 ```Connection conn = DbUtil.getConnection(clazz, new Shard(clazz, shardVal));```
 Then everything is just like what you've done in jdbc programming.
 
++ spring support
+
+		DataSource dataSource = DbUtil.getDataSource(Teacher.class, new Shard(Teacher.class, 1));
+	
+	    ShardJdbcTemplate shardJdbcTemplate = new ShardJdbcTemplate(dataSource);
+
 Enjoy it.
 
 What is on plan:
 
 + ORM support
-+ spring jdbc support
++ spring jdbc annotation support
 + code completion to make it more easy to maintain
