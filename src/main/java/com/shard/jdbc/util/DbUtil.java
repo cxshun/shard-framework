@@ -1,13 +1,13 @@
 package com.shard.jdbc.util;
 
-import com.shard.jdbc.exception.DbException;
-import com.shard.jdbc.shard.ShardProperty;
-import com.shard.jdbc.shard.ShardType;
 import com.shard.jdbc.database.DbInfo;
+import com.shard.jdbc.exception.DbException;
 import com.shard.jdbc.exception.NoMatchDataSourceException;
+import com.shard.jdbc.reader.impl.DbXmlReader;
 import com.shard.jdbc.reader.impl.ShardXmlReader;
 import com.shard.jdbc.shard.Shard;
-import com.shard.jdbc.reader.impl.DbXmlReader;
+import com.shard.jdbc.shard.ShardProperty;
+import com.shard.jdbc.shard.ShardType;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.prefs.BackingStoreException;
 
 /**
  * Created by shun on 2015-12-17 14:41.
