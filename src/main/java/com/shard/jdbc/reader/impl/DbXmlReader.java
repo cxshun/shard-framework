@@ -58,7 +58,7 @@ public class DbXmlReader extends Reader {
             dbInfo.setUrl(database.getChildTextTrim(URL_NODE));
             dbInfo.setUsername(database.getChildTextTrim(USERNAME_NODE));
 
-            //cache it, in order by check if existed
+            //cache it, used to check if duplicated
             dbInfoMap.put(id, dbInfo);
             dbInfoList.add((T)dbInfo);
         }

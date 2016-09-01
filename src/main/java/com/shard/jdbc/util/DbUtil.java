@@ -31,14 +31,14 @@ public class DbUtil {
     private static List<ShardProperty> shardProperties = new ArrayList<ShardProperty>();
     static {
         try {
-            List<DbInfo> dbInfoList = new DbXmlReader().process(DbUtil.class.getClass().getResource("/database.xml").getPath(), DbInfo.class);
+            List<DbInfo> dbInfoList = new DbXmlReader().process(DbUtil.class.getClassLoader().getResource("database.xml").getPath(), DbInfo.class);
             for (DbInfo dbInfo:dbInfoList) {
                 dbInfoMap.put(dbInfo.getId(), dbInfo);
             }
 
-            shardProperties = new ShardXmlReader().process(DbUtil.class.getResource("/shard.xml").getPath(), ShardProperty.class);
+            shardProperties = new ShardXmlReader().process(DbUtil.class.getClassLoader().getResource("shard.xml").getPath(), ShardProperty.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("error loading database.xml/shard.xml", e);
         }
     }
 
