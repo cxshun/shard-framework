@@ -23,4 +23,13 @@ public class Teacher {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public int hashCode() {
+        return Long.valueOf(id).hashCode() + name.hashCode();
+    }
+
+    public String toString() {
+        return "id:" + id + ", name:" + name;
+    }
 }
