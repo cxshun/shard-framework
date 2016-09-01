@@ -11,25 +11,25 @@
 -->
 <databases>
     <database id="data1">
-        <url>jdbc:mysql://localhost:3306/data1</url>
+        <url>jdbc:mysql://localhost:3306/data1?useSSL=false</url>
         <driver>com.mysql.jdbc.Driver</driver>
         <username>root</username>
         <password>root</password>
     </database>
     <database id="data2">
-        <url>jdbc:mysql://localhost:3306/data2</url>
+        <url>jdbc:mysql://localhost:3306/data2?useSSL=false</url>
         <driver>com.mysql.jdbc.Driver</driver>
         <username>root</username>
         <password>root</password>
     </database>
     <database id="data3">
-        <url>jdbc:mysql://localhost:3306/data3</url>
+        <url>jdbc:mysql://localhost:3306/data3?useSSL=false</url>
         <driver>com.mysql.jdbc.Driver</driver>
         <username>root</username>
         <password>root</password>
     </database>
     <database id="data4">
-        <url>jdbc:mysql://localhost:3306/data4</url>
+        <url>jdbc:mysql://localhost:3306/data4?useSSL=false</url>
         <driver>com.mysql.jdbc.Driver</driver>
         <username>root</username>
         <password>root</password>
