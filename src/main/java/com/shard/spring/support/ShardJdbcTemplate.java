@@ -1,6 +1,5 @@
 package com.shard.spring.support;
 
-import com.google.gson.Gson;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -14,7 +13,6 @@ import java.util.logging.Logger;
 public class ShardJdbcTemplate extends JdbcTemplate{
 
     private Logger logger = Logger.getLogger(ShardJdbcTemplate.class.getName());
-    private static final Gson gson = new Gson();
 
     public ShardJdbcTemplate(DataSource dataSource) {
         super(dataSource);

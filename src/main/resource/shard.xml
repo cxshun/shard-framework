@@ -17,8 +17,9 @@
                     <match match="0">data1</match>
                 </range>
             case "none":
-                the class is not shard, just add match node by not specifying add match attribute.
+                class is not shard, just add match node by not specifying match attribute.
                 <match>data1</match>
+        shard-property:class field name used to shard, need to be present when specify type is not none
 
         match node:
             indicate what case to be match.
@@ -27,13 +28,13 @@
             indicate what scope to be match.
 -->
 <shards>
-    <shard class="com.shard.jdbc.domain.Student" type="hash">
+    <shard class="com.shard.jdbc.domain.Student" type="hash" shard-field="id">
         <match match="0">data1</match>
         <match match="1">data2</match>
         <match match="2">data3</match>
         <match match="3">data4</match>
     </shard>
-    <shard class="com.shard.jdbc.domain.Teacher" type="range-hash">
+    <shard class="com.shard.jdbc.domain.Teacher" type="range-hash" shard-field="id">
         <range range="0~30">
             <match match="0">data1</match>
             <match match="1">data2</match>
@@ -47,7 +48,7 @@
             <match match="3">data4</match>
         </range>
     </shard>
-    <shard class="com.shard.jdbc.domain.Building" type="range">
+    <shard class="com.shard.jdbc.domain.Building" type="range" shard-field="id">
         <match match="0~20">data1</match>
         <match match="21~40">data2</match>
         <match match="41~60">data3</match>

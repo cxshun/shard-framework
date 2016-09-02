@@ -19,7 +19,7 @@ public class ShardJdbcTemplateTest extends TestCase{
 
     @Test
     public void test() throws DbException, SQLException {
-        DataSource dataSource = DbUtil.getDataSource(Teacher.class, new Shard(Teacher.class, 1));
+        DataSource dataSource = DbUtil.getDataSource(Teacher.class, new Shard(Teacher.class, "id", 1));
 
         ShardJdbcTemplate shardJdbcTemplate = new ShardJdbcTemplate(dataSource);
         List<Teacher> teacherList = shardJdbcTemplate.query("select * from teacher", new BeanPropertyRowMapper(Teacher.class));

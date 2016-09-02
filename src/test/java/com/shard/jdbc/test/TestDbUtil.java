@@ -21,15 +21,15 @@ public class TestDbUtil extends TestCase{
     @Test
     public void test() throws DbException, SQLException {
         //hash
-        Connection conn = DbUtil.getConnection(Teacher.class, new Shard(Teacher.class, 1));
+        Connection conn = DbUtil.getConnection(Teacher.class, new Shard(Teacher.class, "id", 1));
         assertEquals(conn.getMetaData().getURL(), "jdbc:mysql://localhost:3306/data2?useSSL=false");
 
         //range-hash
-        conn = DbUtil.getConnection(Student.class, new Shard(Student.class, 4));
+        conn = DbUtil.getConnection(Student.class, new Shard(Student.class, "id", 4));
         assertEquals(conn.getMetaData().getURL(), "jdbc:mysql://localhost:3306/data1?useSSL=false");
 
         //range
-        conn = DbUtil.getConnection(Building.class, new Shard(Building.class, 70));
+        conn = DbUtil.getConnection(Building.class, new Shard(Building.class, "id", 70));
         assertEquals(conn.getMetaData().getURL(), "jdbc:mysql://localhost:3306/data4?useSSL=false");
 
         conn = DbUtil.getConnection(Course.class);

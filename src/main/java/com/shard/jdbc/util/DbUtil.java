@@ -104,6 +104,11 @@ public class DbUtil {
      */
     private static String getDataSourceId(Class clazz, Shard shard) throws NoMatchDataSourceException {
         for (ShardProperty shardProperty:shardProperties) {
+            if (shardProperty.getType() != ShardType.NONE && !shard.getPropName().equals(shardProperty.getPropName())) {
+                throw new NoMatchDataSourceException("shard propName is error, configuration for node:[%s]'s shard-property is:[%s]," +
+                        "but passing is:[%s]", shardProperty.getClazz(), shardProperty.getPropName(), shard.getPropName());
+            }
+
             if (shardProperty.getClazz().equals(clazz.getName())) {
                 List<ShardProperty.MatchInfo> matchInfoList = shardProperty.getMatchInfoList();
                 if (shardProperty.getType().equals(ShardType.HASH)) {

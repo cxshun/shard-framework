@@ -1,12 +1,15 @@
 package com.shard.jdbc.shard;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
+ * shard config class
  * Created by shun on 2015-12-16 16:00.
  */
-public class ShardProperty {
+public class ShardProperty implements Serializable{
 
+    private static final long serialVersionUID = 5972214023111686446L;
     /**
      * shard class name, all specify name, including package name
      */
@@ -15,6 +18,10 @@ public class ShardProperty {
      * shard type
      */
     private String type;
+    /**
+     * shard property
+     */
+    private String propName;
     /**
      * shard match properties
      */
@@ -42,6 +49,14 @@ public class ShardProperty {
 
     public void setMatchInfoList(List<MatchInfo> matchInfoList) {
         this.matchInfoList = matchInfoList;
+    }
+
+    public String getPropName() {
+        return propName;
+    }
+
+    public void setPropName(String propName) {
+        this.propName = propName;
     }
 
     /**
