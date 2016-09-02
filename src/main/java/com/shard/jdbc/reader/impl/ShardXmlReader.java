@@ -5,6 +5,8 @@ import com.shard.jdbc.reader.Reader;
 import com.shard.jdbc.shard.ShardProperty;
 import com.shard.jdbc.shard.ShardType;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -20,6 +22,8 @@ import java.util.List;
  * Created by shun on 2015-12-16 16:10.
  */
 public class ShardXmlReader extends Reader {
+
+    private static final Logger logger = LogManager.getRootLogger();
 
     private static final String CLASS_ATTRIBUTE = "class";
     private static final String TYPE_ATTRIBUTE = "type";
@@ -38,6 +42,8 @@ public class ShardXmlReader extends Reader {
 
     @Override
     public <T> List<T> process(String path, Class<T> tClass) throws Exception{
+        logger.info(String.format("loading shard configuration:[%s]", path));
+
         SAXBuilder saxBuilder = new SAXBuilder();
 
         List<T> shardProperties = new ArrayList<T>();
@@ -124,10 +130,11 @@ public class ShardXmlReader extends Reader {
                 shardProperties.add((T)shardProperty);
             }
         } catch (JDOMException e) {
-            e.printStackTrace();
+            logger.error(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
+
         return shardProperties;
     }
 

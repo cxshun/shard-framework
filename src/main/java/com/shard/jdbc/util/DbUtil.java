@@ -9,6 +9,8 @@ import com.shard.jdbc.shard.Shard;
 import com.shard.jdbc.shard.ShardProperty;
 import com.shard.jdbc.shard.ShardType;
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -23,6 +25,8 @@ import java.util.Map;
  * Created by shun on 2015-12-17 14:41.
  */
 public class DbUtil {
+
+    final static Logger logger = LogManager.getRootLogger();
 
     private static Map<String, DbInfo> dbInfoMap = new HashMap<String, DbInfo>();
     private static Map<String, Connection> connectionMap = new HashMap<String, Connection>();
@@ -65,9 +69,9 @@ public class DbUtil {
             connectionMap.put(dbInfo.getId(), conn);
             return conn;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.error(e);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         throw new NoMatchDataSourceException("no match dataSource found for dataSourceId:%s", dataSourceId);
     }

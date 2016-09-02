@@ -1,10 +1,12 @@
 package com.shard.jdbc.reader.impl;
 
+import com.shard.jdbc.database.DbInfo;
 import com.shard.jdbc.exception.DuplicateDBException;
 import com.shard.jdbc.exception.InvalidShardConfException;
-import com.shard.jdbc.database.DbInfo;
 import com.shard.jdbc.reader.Reader;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -21,6 +23,8 @@ import java.util.Map;
  */
 public class DbXmlReader extends Reader {
 
+    private Logger logger = Logger.getRootLogger();
+
     private static final String DATABASE_NODE = "database";
     private static final String DRIVER_NODE = "driver";
     private static final String USERNAME_NODE = "username";
@@ -33,6 +37,8 @@ public class DbXmlReader extends Reader {
 
     @Override
     public <T> List<T> process(String path, Class<T> tClass) throws Exception{
+        logger.info(String.format("loading db configuration:[%s]", path));
+
         SAXBuilder saxBuilder = new SAXBuilder();
         List<T> dbInfoList = new ArrayList<T>();
 
@@ -62,6 +68,7 @@ public class DbXmlReader extends Reader {
             dbInfoMap.put(id, dbInfo);
             dbInfoList.add((T)dbInfo);
         }
+
         return dbInfoList;
     }
 
