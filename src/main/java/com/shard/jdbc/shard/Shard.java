@@ -10,22 +10,22 @@ public class Shard implements Serializable{
 
     private static final long serialVersionUID = -2405737710724475171L;
     private Class clazz;
-    private String propName;
+    private String column;
     private int value;
 
     public Shard() {}
-    public Shard(Class clazz, String propName, int value) {
+    public Shard(Class clazz, String column, int value) {
         this.clazz = clazz;
-        this.propName = propName;
+        this.column = column;
         this.value = value;
     }
 
-    public String getPropName() {
-        return propName;
+    public String getColumn() {
+        return column;
     }
 
-    public void setPropName(String propName) {
-        this.propName = propName;
+    public void setColumn(String column) {
+        this.column = column;
     }
 
     public int getValue() {

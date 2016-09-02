@@ -4,7 +4,6 @@ import com.shard.jdbc.exception.InvalidShardConfException;
 import com.shard.jdbc.reader.Reader;
 import com.shard.jdbc.shard.ShardProperty;
 import com.shard.jdbc.shard.ShardType;
-import com.shard.jdbc.util.ClassUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -24,7 +23,7 @@ public class ShardXmlReader extends Reader {
 
     private static final String CLASS_ATTRIBUTE = "class";
     private static final String TYPE_ATTRIBUTE = "type";
-    private static final String SHARD_FIELD_ATTRIBUTE = "shard-field";
+    private static final String COLUMN_ATTRIBUTE = "column";
 
     private static final String MATCH_ATTRIBUTE = "match";
     private static final String RANGE_ATTRIBUTE = "range";
@@ -64,23 +63,17 @@ public class ShardXmlReader extends Reader {
 
                 //if specify shard type, then shard-property node need to be present
                 if (type.equals(ShardType.HASH) || type.equals(ShardType.RANGE) || type.equals(ShardType.RANGE_HASH)) {
-                    String propName = ele.getAttributeValue(SHARD_FIELD_ATTRIBUTE);
+                    String propName = ele.getAttributeValue(COLUMN_ATTRIBUTE);
                     if (StringUtils.isEmpty(propName)) {
-                        throw new InvalidShardConfException(String.format("invalid configuration for shard node:[%s], missing shard-property attribute",
+                        throw new InvalidShardConfException(String.format("invalid configuration for shard node:[%s], missing column attribute",
                                 ele.getAttributeValue(CLASS_ATTRIBUTE)));
                     }
 
                     //check is class name is right, propertyName is exist in the specify class
-                    Class clazz = null;
                     try {
-                        clazz = Class.forName(ele.getAttributeValue(CLASS_ATTRIBUTE));
+                        Class.forName(ele.getAttributeValue(CLASS_ATTRIBUTE));
                     } catch (Exception e) {
                         throw new InvalidShardConfException(String.format("invalid configuration for shard node:[%s], class error",
-                                ele.getAttributeValue(CLASS_ATTRIBUTE)));
-                    }
-
-                    if (clazz != null && !ClassUtil.hasField(clazz, propName)) {
-                        throw new InvalidShardConfException(String.format("shard node:[%s], shard-property seems not existed",
                                 ele.getAttributeValue(CLASS_ATTRIBUTE)));
                     }
                 }
@@ -88,7 +81,7 @@ public class ShardXmlReader extends Reader {
                 ShardProperty shardProperty = new ShardProperty();
                 shardProperty.setClazz(ele.getAttributeValue(CLASS_ATTRIBUTE));
                 shardProperty.setType(ele.getAttributeValue(TYPE_ATTRIBUTE));
-                shardProperty.setPropName(ele.getAttributeValue(SHARD_FIELD_ATTRIBUTE));
+                shardProperty.setColumn(ele.getAttributeValue(COLUMN_ATTRIBUTE));
 
                 List<ShardProperty.MatchInfo> matchInfoList = new ArrayList<ShardProperty.MatchInfo>();
                 //if shard type is range-hash, it has another node range, so join range and match value with /

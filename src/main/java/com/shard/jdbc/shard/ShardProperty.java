@@ -19,9 +19,9 @@ public class ShardProperty implements Serializable{
      */
     private String type;
     /**
-     * shard property
+     * shard column
      */
-    private String propName;
+    private String column;
     /**
      * shard match properties
      */
@@ -51,12 +51,12 @@ public class ShardProperty implements Serializable{
         this.matchInfoList = matchInfoList;
     }
 
-    public String getPropName() {
-        return propName;
+    public String getColumn() {
+        return column;
     }
 
-    public void setPropName(String propName) {
-        this.propName = propName;
+    public void setColumn(String column) {
+        this.column = column;
     }
 
     /**

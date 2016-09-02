@@ -21,7 +21,7 @@ Every database connection is a database node.
 
 + Just feel easy to add the following code to indicate Student to be shard by hash.
 
-        <shard class="com.shun.domain.Student" column="id" property="id" type="hash">
+        <shard class="com.shun.domain.Student" shard-field="id" type="hash">
             <match match="0">data1</match>
             <match match="1">data2</match>
             <match match="2">data3</match>
